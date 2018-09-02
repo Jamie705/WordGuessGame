@@ -13,75 +13,112 @@ var losses = 0;
 var guessesLeft = 10;
 var lettersGuess = [];
 var missedLog = [];
+var correctLetters = [];
 var wordGuess ="";
-var lettersLeft =[];
+
 //get started event variable
 var getStarted = "";
 //answer variable
-var answerBlank = [];
+var answerBlank =[];
+
+
+function startGame() {
+    // Randomly math to chooses a word from list. Computer picks.
+    wordGuess = wordChoices[Math.floor(Math.random() * wordChoices.length)];
+    console.log("Computer guessed: " + wordGuess);
+    answerBlank = [];
+    for (var i = 0; i < wordGuess.length; i++) {
+        answerBlank[i] = "_";
+    }
+}
 
 //function to reset game
 function reset() {
     guessesLeft = 10;
     lettersGuess = [];
-}    
-// This function is run whenever the user presses a key. To start
-document.onkeyup = function (event) {
-getStarted = event.key;
-console.log("Start guessing some letters");
+    missedLog = [];
+    wordGuess = "";
+    startGame();
+} 
 
-// Randomly math to chooses a word from list. Computer picks.
-var wordGuess = wordChoices[Math.floor(Math.random() * wordChoices.length)];
-console.log("Computer guessed: " + wordGuess);  
-
-//create variable to push blank spaces equal to chars in wordGuess
-answerBlank = [];
-for (var i = 0; i < wordGuess.length; i++) {
-    answerBlank[i] = "_"; 
-}
-console.log(answerBlank);
-answerBlank= answerBlank.join(" ");
-document.querySelector('#answerblank').innerHTML= "Answer: " + answerBlank;
-      
-    //create new event to log letters guessed
-    document.onkeyup = function (event) {
-    lettersGuess = event.key;
-    console.log("Letter guessed: " + lettersGuess);  
-
-    // If user does not match pc guess, decrement guesses left and push lettter to guessed letters.
-    // If statments for (win/loss/guesses left)
-    if (wordGuess.indexOf(lettersGuess) > -1) {
-        console.log(lettersGuess + ": You guessed a letter!");
-        for (var j = 0; j < wordGuess.length; j++) { 
-            if (wordGuess[j] === lettersGuess) {
-                answerBlank[j]= lettersGuess[j];
-                console.log(answerBlank);
-            }
-        }
-    }
-
-    if (wordGuess.indexOf(lettersGuess) < -1) {
-        missedLog.push(lettersGuess);
-        guessesLeft--;
-        console.log(lettersGuess + ":is not in the secret word");
-    } 
-
-    if (wordGuess.length === lettersGuess.length) {
-        wins++;
-        reset();
-        console.log("You have guessed the word correctly. You win.");
-    }
-
-    // if (guessesLeft === 0)
-    //     losses++;
-    //     console.log("You ran out of guesses.Game Over");
-    //     reset();
-    }
-
-//update HTML to show wins, losses, guesses left and letters guessed
+//function to update html page
+function update() {
     document.querySelector('#wins').innerHTML = "Wins: " + wins;
     document.querySelector('#missed').innerHTML = "Missed so far: " + missedLog;
     document.querySelector('#losses').innerHTML = "Losses: " + losses;
     document.querySelector('#guessesleft').innerHTML = "Guesses left: " + guessesLeft;
-
+    document.querySelector('#answerblank').innerHTML = answerBlank;
 }
+     
+    // This function is run whenever the user presses a key. To start
+    document.onkeyup = function (event) {
+    getStarted = event.key;
+    startGame();
+    console.log("Start guessing some letters");
+    
+//   function startGame() {
+//           // Randomly math to chooses a word from list. Computer picks.
+//         wordGuess = wordChoices[Math.floor(Math.random() * wordChoices.length)];
+//         console.log("Computer guessed: " + wordGuess);
+//         answerBlank = [];
+//         for (var i = 0; i < wordGuess.length; i++) {
+//             answerBlank[i] = "_";
+//         } 
+//  }       
+    // var wordGuess = wordChoices[Math.floor(Math.random() * wordChoices.length)];
+    // console.log("Computer guessed: " + wordGuess);      
+
+    //create variable to push blank spaces equal to chars in wordGuess
+        answerBlank = [];
+        for (var i = 0; i < wordGuess.length; i++) {
+            answerBlank[i] = "_"; 
+        }
+        console.log(answerBlank);
+        document.querySelector('#answerblank').innerHTML= "Answer: " + answerBlank.join(" ");
+
+
+        //create new event to log letters guessed
+        document.onkeyup = function (event) {
+        lettersGuess = event.key.toLowerCase();
+        console.log("Letter guessed: " + lettersGuess);  
+
+            // If user does not match pc guess, decrement guesses left and push lettter to guessed letters.
+            // If statments for (win/loss/guesses left)
+                if (answerBlank.join("") === wordGuess) {
+                    wins++;
+                    console.log("You have guessed correctly. You win.");
+                    update();
+                    reset();
+                    startGame();
+                    console.log("Press any key to restart.");
+                }
+                // If user maxes guess, reset user guesses to 10 and letters guessed
+                else if (guessesLeft === 1) {
+                    console.log("you ran out of guesses");
+                    losses++;
+                    update();
+                    reset();
+                    update();
+                }
+                    // If user does not match pc guess, decrement guesses left and push lettter to guessed letters.
+                else if (wordGuess.indexOf(lettersGuess) === -1) {
+                        guessesLeft--;
+                        missedLog.push(lettersGuess);
+                        console.log("Guess again.");
+                        update();
+                }
+                // search for letter in word, push letter to correctletters array, fill in blanks;
+                else if (wordGuess.indexOf(lettersGuess) > -1) {
+                    console.log(lettersGuess + ": You guessed a letter!");
+                    correctLetters.push(lettersGuess);
+                    for (var j = 0; j < wordGuess.length; j++) { 
+                        if (wordGuess[j] === lettersGuess) {
+                            answerBlank[j] = lettersGuess;
+                            update();
+                            
+                        }           
+                    }
+                }   
+        }
+    }
+

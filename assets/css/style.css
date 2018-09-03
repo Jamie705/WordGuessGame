@@ -1,0 +1,36 @@
+body {
+    background-image: url(../images/re.jpg)
+}
+
+.head {
+    color: rgb(130, 183, 230);
+    text-align: center;
+    margin: 50px;
+    font-family: 'Creepster', 'cursive', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.info {
+    color: whitesmoke;
+    font-family: 'Dokdo', 'cursive' 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 20px;
+}
+
+.pinfo {
+    margin-left: 10%;
+}
+#guessWord {
+    margin-left: 50px;
+}
+#missed{
+    color: maroon;
+    font-family: 'Dokdo', 'cursive' 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 20px;
+    margin-left: 135px;
+}
+
+#answerblank {
+    color: maroon;
+    font-family: 'Bungee', 'cursive' 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 45px;
+    margin: 10px 150px;
+}

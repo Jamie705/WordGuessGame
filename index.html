@@ -6,17 +6,41 @@
     <title>Word Guess Game</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Bungee|Creepster|Dokdo|Gloria+Hallelujah" rel="stylesheet">
     <script src="assets/javascript/game.js"></script>
 </head>
+
 <body>
-    <h1>Gues the Word</h1>
-        <p>Press any key to get started</p>
-        <div id="guessWord">
-            <p id="wins">Wins: 0 </p>
-            <p id="losses">Losses: 0</p>
-            <p id="guessesleft">Guesses Left: 10</p>
-            <p id="missed">Letters Guesses so far:  </p>
-            <p id="answerblank">Answer: </p>
-        </div>
-</body>
+    <!-- Titles in zombie type and headers -->
+    <div class="head row container 8">
+        <h1 class="container">GUESS THE WORD</h1>
+        <h2 class="container">Press any key to get started!</h2>    
+    </div>
+    <!-- added row to seperate from header -->
+    <div class="info row container col-8" id="guessWord">
+        <p class="pinfo" id="wins">Wins: 0 </p>
+        <p class="pinfo" id="losses">Losses: 0</p>
+        <p class="pinfo" id="guessesleft">Number of Guesses Remaining: 10</p>
+    </div>
+    <!-- new row to seperate answer and missed letters -->
+    <div class="answer row container col-8">
+          <p id="answerblank">Answer: Secret </p>
+          <p class="row container" id="missed">Letters Already Guessed: </p>
+      
+    </div>
+    <!-- added music to go with theme -->
+    <div>
+        <embed loop="true" src="https://upload.wikimedia.org/wikipedia/en/3/33/The_Cranberries_-_Zombie.ogg" hidden="true" type="video/quicktime">
+        </embed>
+    </div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+    </body>
 </html>
